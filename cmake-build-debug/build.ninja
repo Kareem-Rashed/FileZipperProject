@@ -67,6 +67,12 @@ build CMakeFiles/HuffmanFileZipper.dir/Node.cpp.o: CXX_COMPILER__HuffmanFileZipp
   OBJECT_DIR = CMakeFiles/HuffmanFileZipper.dir
   OBJECT_FILE_DIR = CMakeFiles/HuffmanFileZipper.dir
 
+build CMakeFiles/HuffmanFileZipper.dir/Huffman.cpp.o: CXX_COMPILER__HuffmanFileZipper_unscanned_Debug /Users/kareem/CLionProjects/HuffmanFileZipper/Huffman.cpp || cmake_object_order_depends_target_HuffmanFileZipper
+  DEP_FILE = CMakeFiles/HuffmanFileZipper.dir/Huffman.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/HuffmanFileZipper.dir
+  OBJECT_FILE_DIR = CMakeFiles/HuffmanFileZipper.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target HuffmanFileZipper
@@ -75,7 +81,7 @@ build CMakeFiles/HuffmanFileZipper.dir/Node.cpp.o: CXX_COMPILER__HuffmanFileZipp
 #############################################
 # Link the executable HuffmanFileZipper
 
-build HuffmanFileZipper: CXX_EXECUTABLE_LINKER__HuffmanFileZipper_Debug CMakeFiles/HuffmanFileZipper.dir/main.cpp.o CMakeFiles/HuffmanFileZipper.dir/PriorityQueue.cpp.o CMakeFiles/HuffmanFileZipper.dir/Node.cpp.o
+build HuffmanFileZipper: CXX_EXECUTABLE_LINKER__HuffmanFileZipper_Debug CMakeFiles/HuffmanFileZipper.dir/main.cpp.o CMakeFiles/HuffmanFileZipper.dir/PriorityQueue.cpp.o CMakeFiles/HuffmanFileZipper.dir/Node.cpp.o CMakeFiles/HuffmanFileZipper.dir/Huffman.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk
   OBJECT_DIR = CMakeFiles/HuffmanFileZipper.dir
   POST_BUILD = :

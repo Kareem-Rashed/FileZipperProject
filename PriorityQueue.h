@@ -12,7 +12,7 @@ using namespace std;
 template <typename T>
 class PriorityQueue
 {
-private:
+public:
 
 
     Node<T> *root;

@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(HuffmanFileZipper main.cpp
         PriorityQueue.cpp
         Node.cpp
-        Node.h)
+        Node.h
+        Huffman.cpp
+        Huffman.h)

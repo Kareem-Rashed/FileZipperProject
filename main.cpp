@@ -1,5 +1,5 @@
 #include <iostream>
-#include "PriorityQueue.h"
+#include "Huffman.h"
 using namespace std;
 
 
@@ -9,9 +9,9 @@ int main()
 
     Node<char>* first = new Node('a', 12);
     Node<char>* second = new Node('b', 3);
-
     Node<char>* third = new Node('c', 90);
 
+    /*
     PriorityQueue<char> pq;
 
     pq.insert(first);
@@ -32,7 +32,10 @@ int main()
     pq.dequeue();
 
     pq.display();
+*/
+    Huffman h("testingfile.txt");
 
+    h.Frequencies("testingfile.txt");
 
 
 
