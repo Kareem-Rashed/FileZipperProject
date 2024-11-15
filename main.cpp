@@ -33,9 +33,15 @@ int main()
 
     pq.display();
 */
-    Huffman h("testingfile.txt");
+    Huffman h("smallertesting.txt");
 
-    h.Frequencies("testingfile.txt");
+    //h.Frequencies("testingfile.txt");
+
+    //h.buildHuffmanTree();
+
+    h.Compress();
+    h.Decompress();
+
 
 
 

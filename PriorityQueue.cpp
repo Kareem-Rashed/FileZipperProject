@@ -30,29 +30,47 @@ PriorityQueue<T>::~PriorityQueue()
 template <typename T>
 void PriorityQueue<T>::insert(const T& data, int priori)
 {
-    Node<T>* newNode = new Node(data, priori);
+    Node<T>* node = new Node(data, priori);
     if(size==0)
     {
-        root = newNode;
+        root = node;
+        size++;
     }
-    if(size==1)
+    else if(size==1)
     {
         if(root->priori > priori)
         {
-            newNode->next = root;
-            root = newNode;
+            node->next = root;
+            root = node;
         }
+        else
+        {
+            root->next = node;
+        }
+        size++;
+
     }
     else
     {
-        Node<T>* temp = root;
-        while(temp->next->priori < priori)
+        if(root->priori < priori)
         {
-            temp = temp->next;
+            Node<T>* temp = root;
+            while((temp->next !=NULL)&&(temp->next->priori < priori))
+            {
+                temp = temp->next;
+            }
+            node->next = temp->next;
+            temp->next = node;
         }
-        newNode->next = temp->next;
-        temp->next = newNode;
+        else
+        {
+            node->next = root;
+            root = node;
+        }
+
+        size++;
     }
+
 }
 
 
@@ -82,15 +100,25 @@ void PriorityQueue<T>::insert(Node<T>* node)
     }
     else
     {
-        Node<T>* temp = root;
-        while((temp->next !=NULL)&&(temp->next->priori < priori))
+        if(root->priori < priori)
         {
-            temp = temp->next;
+            Node<T>* temp = root;
+            while((temp->next !=NULL)&&(temp->next->priori < priori))
+            {
+                temp = temp->next;
+            }
+            node->next = temp->next;
+            temp->next = node;
         }
-        node->next = temp->next;
-        temp->next = node;
+        else
+        {
+            node->next = root;
+            root = node;
+        }
+
         size++;
     }
+
 }
 
 template <typename T>
@@ -100,8 +128,10 @@ Node<T>* PriorityQueue<T>::dequeue()
         return NULL;
     else if(size==1)
     {
+        Node<T>* temp = root;
         root = NULL;
         size--;
+        return temp;
     }
     else
     {

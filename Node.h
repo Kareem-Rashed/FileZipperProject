@@ -16,9 +16,12 @@ public:
     T data;
     int priori;
     Node *next;
+    Node *right;
+    Node *left;
 
 
-    Node(const T& data, int priority ): data(data), priori(priority), next(nullptr) {}
+
+    Node(const T& data, int priority ): data(data), priori(priority), next(nullptr), right(nullptr), left(nullptr) {}
     T getData() const;
     int getPriority() const;
 };

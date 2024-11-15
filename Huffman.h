@@ -15,18 +15,18 @@ using namespace std;
 class Huffman {
 private:
     string fileName;
-    struct TreeNode
-    {
-        char data;
-        TreeNode *left;
-        TreeNode *right;
-    };
+    Node<char>* root;
+    unordered_map<char, vector<bool>> Encodings;
 
 
 public:
     Huffman(string file);
-    PriorityQueue<char> Frequencies(string file);
     ~Huffman();
+    PriorityQueue<char> Frequencies(string file);
+    void buildHuffmanTree();
+    void CreateEncodings(Node<char>* temproot, string enc);
+    void Compress();
+    void Decompress();
 
 
 
