@@ -135,6 +135,7 @@ void Huffman::Compress() {
     }
 //the rest
     if (bitCount > 0) {
+        padding = 8-bitCount;
         buffer = buffer << (8 - bitCount);
         outfile.put(buffer);
     }
@@ -153,6 +154,7 @@ void Huffman::Decompress() {
 
     char ch;
     unsigned char buffer;
+
     Node<char>* currentNode = root;
 
     while (infile.get(reinterpret_cast<char&>(buffer))) {
@@ -167,9 +169,16 @@ void Huffman::Decompress() {
             {
                 currentNode = currentNode->left;
             }
-            if (!currentNode->left && !currentNode->right) {
-                outfile.put(currentNode->data);
-                currentNode = root;
+            if ((currentNode->left == NULL)&& (currentNode->right == NULL)) {
+                if ((infile.peek() == EOF)&& i < padding)
+                {
+                    return;
+                }
+                else
+                {
+                    outfile.put(currentNode->data);
+                    currentNode = root;
+                }
             }
         }
     }

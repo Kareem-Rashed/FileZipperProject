@@ -15,6 +15,7 @@ using namespace std;
 class Huffman {
 private:
     string fileName;
+    int padding;
     Node<char>* root;
     unordered_map<char, vector<bool>> Encodings;
 
