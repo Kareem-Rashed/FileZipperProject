@@ -33,7 +33,7 @@ int main()
 
     pq.display();
 */
-    Huffman h("smallertesting.txt");
+    Huffman h("testingfile.txt");
 
     //h.Frequencies("testingfile.txt");
 

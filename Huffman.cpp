@@ -82,7 +82,7 @@ void Huffman::CreateEncodings(Node<char>* temproot, string enc)
     {
         vector<bool> newVector;
 
-        for(int i=0; i<enc.size()-1; i++)
+        for(int i=0; i<enc.size(); i++)
         {
             if(enc[i] == '1')
             {
@@ -103,52 +103,48 @@ void Huffman::CreateEncodings(Node<char>* temproot, string enc)
 
     }
 }
+void Huffman::Compress() {
+    buildHuffmanTree();
+    CreateEncodings(root, "");
 
-void Huffman::Compress()
-{
-    buildHuffmanTree();  // Build the Huffman tree
-    CreateEncodings(root, "");  // Create Huffman codes for each character
+    ifstream infile(fileName, ios::binary);
+    ofstream outfile("Compressed.bin", ios::binary);
 
-    // Open files for reading and writing
-    ofstream outfile("Compressed.txt", ios::binary);
-    ifstream infile(fileName);
     if (!infile.is_open()) {
-        cerr << "Error: Unable to open corpus file '" << fileName << "'." << endl;
+        cerr << "Error: Unable to open input file '" << fileName << "'." << endl;
         return;
     }
 
+    unsigned char buffer = 0;
+    int bitCount = 0;
+
     char ch;
+    while (infile.get(ch)) {
+        vector<bool> encoding = Encodings[ch];
 
+        for (bool bit : encoding) {
+            buffer = buffer * 2 + bit;
+            bitCount++;
 
-    while (infile.get(ch))
-    {
-        if (ch >= 32 && ch <= 126)  // Only handle printable ASCII characters
-        {
-            vector<bool> encoding = Encodings[ch];
-
-            for(int i=0; i<encoding.size(); i++)
-            {
-                if(encoding[i] == 1)
-                {
-                    outfile<<'1';
-                }
-                else
-                {
-                    outfile<<'0';
-                }
+            if (bitCount == 8) {
+                outfile.put(buffer);
+                buffer = 0;
+                bitCount = 0;
             }
         }
+    }
+//the rest
+    if (bitCount > 0) {
+        buffer = buffer << (8 - bitCount);
+        outfile.put(buffer);
     }
 
     infile.close();
     outfile.close();
 }
-void Huffman::Decompress()
-{
-    ofstream outfile;
-    outfile.open("Decompressed.txt");
-    ifstream infile;
-    infile.open("Compressed.txt", ios::binary);
+void Huffman::Decompress() {
+    ifstream infile("Compressed.bin", ios::binary);
+    ofstream outfile("Decompressed.txt");
 
     if (!infile.is_open()) {
         cerr << "Error: Unable to open compressed file." << endl;
@@ -156,26 +152,28 @@ void Huffman::Decompress()
     }
 
     char ch;
+    unsigned char buffer;
     Node<char>* currentNode = root;
 
-    while (infile.get(ch))
-    {
-        bool bit = (ch == '1');
+    while (infile.get(reinterpret_cast<char&>(buffer))) {
+        for (int i = 7; i >= 0; i--) {
 
-        if (bit == 0) {
-            currentNode = currentNode->left;
-        } else {
-            currentNode = currentNode->right;
-        }
-
-        if (currentNode->left == nullptr && currentNode->right == nullptr) {
-            outfile.put(currentNode->data);
-            currentNode = root;
+            bool bit = (buffer >> i) & 1;  //getting the ith bit
+            if(bit)
+            {
+                currentNode = currentNode->right;
+            }
+            else
+            {
+                currentNode = currentNode->left;
+            }
+            if (!currentNode->left && !currentNode->right) {
+                outfile.put(currentNode->data);
+                currentNode = root;
+            }
         }
     }
 
-
-    // Close the files
     infile.close();
     outfile.close();
 }
