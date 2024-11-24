@@ -1,0 +1,1 @@
+-isystem D:/practice/FileZipper/FileZipperProject/googletest/googlemock/include -isystem D:/practice/FileZipper/FileZipperProject/googletest/googlemock -isystem D:/practice/FileZipper/FileZipperProject/googletest/googletest/include -isystem D:/practice/FileZipper/FileZipperProject/googletest/googletest
