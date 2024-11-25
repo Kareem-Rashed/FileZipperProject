@@ -314,6 +314,9 @@ FileZipperProject_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 FileZipperProject_SOURCE_DIR:STATIC=D:/practice/FileZipper/FileZipperProject
 
+//Disable GoogleTest tests
+GTEST_BUILD_TESTS:BOOL=OFF
+
 //Use Abseil and RE2. Requires Abseil and RE2 to be separately
 // added to the build.
 GTEST_HAS_ABSL:BOOL=OFF
